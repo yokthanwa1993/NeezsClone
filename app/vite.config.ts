@@ -8,7 +8,8 @@ export default defineConfig(() => ({
     port: 5000,
     hmr: {
       clientPort: 443,
-      protocol: "wss"
+      protocol: "wss",
+      host: "d4bd62c5-5381-40c0-b008-d58217690732-00-2hbxx8jies6lw.spock.replit.dev"
     },
     proxy: {
       "/api": {
