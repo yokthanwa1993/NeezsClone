@@ -38,7 +38,7 @@ const LineLogin: React.FC<LineLoginProps> = ({ onLoginSuccess }) => {
         console.log('User is already logged in to LIFF, but auth context is missing. Re-authenticating.');
       }
       
-      const redirectUri = new URL('/callback', window.location.origin).toString();
+      const redirectUri = new URL('/callback', import.meta.env.VITE_APP_DOMAIN || window.location.origin).toString();
       console.log('🚀 Starting LINE login with redirect:', redirectUri);
 
       // Start LINE login

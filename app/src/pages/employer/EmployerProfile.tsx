@@ -49,13 +49,13 @@ const EmployerProfile: React.FC = () => {
     const shareData = {
       title: `โปรไฟล์บริษัท ${companyProfile.name}`,
       text: `ดูโปรไฟล์ของ ${companyProfile.name} และตำแหน่งงานที่เปิดรับสมัคร`,
-      url: window.location.href,
+      url: (import.meta.env.VITE_APP_DOMAIN || window.location.origin) + window.location.pathname,
     };
     try {
       if (navigator.share) {
         await navigator.share(shareData);
       } else {
-        await navigator.clipboard.writeText(window.location.href);
+        await navigator.clipboard.writeText((import.meta.env.VITE_APP_DOMAIN || window.location.origin) + window.location.pathname);
         alert('คัดลอกลิงก์โปรไฟล์แล้ว!');
       }
     } catch (error) {

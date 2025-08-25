@@ -49,7 +49,7 @@ const ProfilePage: React.FC = () => {
     const shareData = {
       title: `โปรไฟล์ของ ${userName}`,
       text: `${userBio}`,
-      url: window.location.href,
+      url: (import.meta.env.VITE_APP_DOMAIN || window.location.origin) + window.location.pathname,
     };
 
     try {
@@ -59,14 +59,14 @@ const ProfilePage: React.FC = () => {
       } 
       // ใช้ Clipboard API ถ้ามี
       else if (navigator.clipboard && navigator.clipboard.writeText) {
-        await navigator.clipboard.writeText(window.location.href);
+        await navigator.clipboard.writeText((import.meta.env.VITE_APP_DOMAIN || window.location.origin) + window.location.pathname);
         alert('คัดลอกลิงก์โปรไฟล์แล้ว! คุณสามารถแชร์ลิงก์นี้ได้');
       } 
       // Fallback สำหรับเบราว์เซอร์เก่า
       else {
         // สร้าง input ซ่อนเพื่อคัดลอก
         const textArea = document.createElement('textarea');
-        textArea.value = window.location.href;
+        textArea.value = (import.meta.env.VITE_APP_DOMAIN || window.location.origin) + window.location.pathname;
         document.body.appendChild(textArea);
         textArea.select();
         document.execCommand('copy');
@@ -79,7 +79,7 @@ const ProfilePage: React.FC = () => {
       // Fallback สำหรับกรณีที่ Clipboard API ไม่ทำงาน
       try {
         const textArea = document.createElement('textarea');
-        textArea.value = window.location.href;
+        textArea.value = (import.meta.env.VITE_APP_DOMAIN || window.location.origin) + window.location.pathname;
         document.body.appendChild(textArea);
         textArea.select();
         document.execCommand('copy');
