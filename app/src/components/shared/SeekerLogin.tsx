@@ -17,7 +17,7 @@ const SeekerLogin: React.FC<SeekerLoginProps> = ({ onLoginSuccess }) => {
     }
   };
 
-  return <LineLogin onLoginSuccess={handleLoginSuccess} />;
+  return <LineLogin onLoginSuccess={handleLoginSuccess} role="seeker" />;
 };
 
 export default SeekerLogin;

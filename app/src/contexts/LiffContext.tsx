@@ -13,6 +13,7 @@ interface LiffContextType {
   isLiffReady: boolean;
   isLiffLoading: boolean;
   liff: any;
+  initializeLiffForRole: (role: 'seeker' | 'employer') => Promise<void>;
 }
 
 const LiffContext = createContext<LiffContextType | undefined>(undefined);
@@ -132,8 +133,9 @@ export const LiffProvider: React.FC<LiffProviderProps> = ({ children }) => {
         await loadLiffSdk();
       }
 
-      const liffId = import.meta.env.VITE_LINE_LIFF_ID || '2007840854-rKv5DGlD';
-      console.log('🆔 Using LIFF ID:', liffId);
+      // Use default seeker LIFF ID for initial load
+      const liffId = import.meta.env.VITE_LIFF_ID_SEEKER || '2007840854-rKv5DGlD';
+      console.log('🆔 Using default LIFF ID:', liffId);
 
       // Initialize LIFF
       await window.liff.init({ liffId });
@@ -293,10 +295,62 @@ export const LiffProvider: React.FC<LiffProviderProps> = ({ children }) => {
     });
   };
 
+  const initializeLiffForRole = async (role: 'seeker' | 'employer') => {
+    if (liffInitializing) {
+      console.log('⏳ LIFF initialization already in progress');
+      return;
+    }
+    
+    liffInitializing = true;
+    setIsLiffLoading(true);
+    
+    try {
+      console.log('🚀 Initializing LIFF for role:', role);
+      
+      // Load LIFF SDK if not already loaded
+      if (!window.liff) {
+        await loadLiffSdk();
+      }
+
+      const liffId = role === 'seeker' 
+        ? import.meta.env.VITE_LIFF_ID_SEEKER || '2007840854-rKv5DGlD'
+        : import.meta.env.VITE_LIFF_ID_EMPLOYER || '2007840854-72vzQ5kQ';
+      
+      console.log(`🆔 Using ${role.toUpperCase()} LIFF ID:`, liffId);
+
+      // Initialize LIFF with role-specific ID
+      await window.liff.init({ liffId });
+      
+      setIsLiffReady(true);
+      liffInitialized = true;
+
+      // Check if user is already logged in
+      const loggedIn = window.liff.isLoggedIn();
+      console.log('🔍 LIFF login status:', loggedIn);
+
+      if (loggedIn) {
+        console.log('✅ User already logged in to LIFF');
+        await handleLoggedInUser();
+      } else {
+        console.log('ℹ️ User not logged in to LIFF');
+        // Store initial access timestamp
+        localStorage.setItem('liff_first_access', new Date().toISOString());
+      }
+
+    } catch (error) {
+      console.error('❌ LIFF initialization error:', error);
+      liffInitialized = false;
+    } finally {
+      setIsLiffLoading(false);
+      liffInitializing = false;
+    }
+  };
+
   const value = {
     isLiffReady,
     isLiffLoading,
-    liff: window.liff
+    liff: window.liff,
+    initializeLiffForRole
   };
 
   return (

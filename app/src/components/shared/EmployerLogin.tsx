@@ -17,7 +17,7 @@ const EmployerLogin: React.FC<EmployerLoginProps> = ({ onLoginSuccess }) => {
     }
   };
 
-  return <LineLogin onLoginSuccess={handleLoginSuccess} />;
+  return <LineLogin onLoginSuccess={handleLoginSuccess} role="employer" />;
 };
 
 export default EmployerLogin;

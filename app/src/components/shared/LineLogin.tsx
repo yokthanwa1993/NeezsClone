@@ -5,13 +5,22 @@ import { useAuth } from '@/contexts/AuthContext';
 
 interface LineLoginProps {
   onLoginSuccess?: () => void;
+  role?: 'seeker' | 'employer';
 }
 
-const LineLogin: React.FC<LineLoginProps> = ({ onLoginSuccess }) => {
+const LineLogin: React.FC<LineLoginProps> = ({ onLoginSuccess, role = 'seeker' }) => {
   const navigate = useNavigate();
-  const { isLiffReady, isLiffLoading, liff } = useLiff();
+  const { isLiffReady, isLiffLoading, liff, initializeLiffForRole } = useLiff();
   const { user } = useAuth();
   const [isLoggingIn, setIsLoggingIn] = useState(false);
+
+  useEffect(() => {
+    // Initialize LIFF for the specific role
+    if (!isLiffReady && !isLiffLoading) {
+      console.log(`🔄 Initializing LIFF for ${role} role`);
+      initializeLiffForRole(role);
+    }
+  }, [role, isLiffReady, isLiffLoading, initializeLiffForRole]);
 
   useEffect(() => {
     // If authentication completes and we get a user object, proceed.
@@ -20,10 +29,11 @@ const LineLogin: React.FC<LineLoginProps> = ({ onLoginSuccess }) => {
       if (onLoginSuccess) {
         onLoginSuccess();
       } else {
-        navigate('/seeker/home');
+        const defaultPath = role === 'seeker' ? '/seeker/home' : '/employer/home';
+        navigate(defaultPath);
       }
     }
-  }, [user, onLoginSuccess]);
+  }, [user, onLoginSuccess, role, navigate]);
 
 
   const handleLogin = async () => {
