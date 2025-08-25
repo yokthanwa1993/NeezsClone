@@ -66,11 +66,9 @@ const AppContent = () => {
 
   useEffect(() => {
     if (isLoading || isLiffLoading) return;
-    const onboardingCompleted = localStorage.getItem('onboardingCompleted');
-    const hasCachedUser = !!localStorage.getItem('auth_user');
-    // Redirect to welcome only on root path and when truly no user/cached user
-    if (location.pathname === '/' && !user && !hasCachedUser && !onboardingCompleted) {
-      navigate('/welcome', { replace: true });
+    // Redirect to login if no user on root path
+    if (location.pathname === '/' && !user) {
+      navigate('/login', { replace: true });
     }
   }, [navigate, isLoading, isLiffLoading, user, location.pathname]);
 
@@ -94,8 +92,7 @@ const AppContent = () => {
   return (
     <Routes>
       {/* Root and Shared Routes */}
-      <Route path="/" element={<Navigate to="/welcome" replace />} />
-      <Route path="/welcome" element={<OnboardingFlow />} />
+      <Route path="/" element={<Navigate to="/login" replace />} />
       <Route path="/login" element={<AppLayout><LineLogin onLoginSuccess={() => navigate('/seeker/home')} /></AppLayout>} />
       <Route path="/seeker/login" element={<AppLayout><SeekerLogin /></AppLayout>} />
       <Route path="/employer/login" element={<AppLayout><EmployerLogin onLoginSuccess={() => navigate('/employer/profile')} /></AppLayout>} />
