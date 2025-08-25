@@ -81,10 +81,10 @@ const AppContent = () => {
   const protectedRoute = (element: React.ReactElement, role: 'seeker' | 'employer' | 'any' = 'any') => {
     if (!user) {
       if (role === 'seeker') {
-        return <Navigate to="/seeker-login" replace />;
+        return <Navigate to="/seeker/login" replace />;
       }
       if (role === 'employer') {
-        return <Navigate to="/employer-login" replace />;
+        return <Navigate to="/employer/login" replace />;
       }
       return <Navigate to="/login" replace />;
     }
@@ -97,8 +97,8 @@ const AppContent = () => {
       <Route path="/" element={<Navigate to="/welcome" replace />} />
       <Route path="/welcome" element={<OnboardingFlow />} />
       <Route path="/login" element={<AppLayout><LineLogin onLoginSuccess={() => navigate('/seeker/home')} /></AppLayout>} />
-      <Route path="/seeker-login" element={<AppLayout><SeekerLogin /></AppLayout>} />
-      <Route path="/employer-login" element={<AppLayout><EmployerLogin onLoginSuccess={() => navigate('/employer/profile')} /></AppLayout>} />
+      <Route path="/seeker/login" element={<AppLayout><SeekerLogin /></AppLayout>} />
+      <Route path="/employer/login" element={<AppLayout><EmployerLogin onLoginSuccess={() => navigate('/employer/profile')} /></AppLayout>} />
       <Route path="/callback" element={<AppLayout><LineCallback /></AppLayout>} />
       
       {/* Protected routes with specific layouts */}
