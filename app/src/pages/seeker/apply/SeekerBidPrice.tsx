@@ -16,7 +16,7 @@ const SeekerBidPrice: React.FC = () => {
     // TODO: POST bid to API when available
     console.log('Submitting bid:', { bid, applyContext: location.state });
     alert('ส่งข้อเสนอราคาเรียบร้อย');
-    navigate('/home', { replace: true });
+    navigate('/seeker/home', { replace: true });
   };
 
   return (

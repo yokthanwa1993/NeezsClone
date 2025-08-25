@@ -8,14 +8,14 @@ const BottomNavigation: React.FC = () => {
   const { user, firebaseUser } = useAuth();
 
   const navItems = [
-    { path: '/home', icon: Home, label: 'หน้าแรก' },
-    { path: '/chat', icon: MessageSquare, label: 'แชท' },
-    { path: '/notifications', icon: Bell, label: 'แจ้งเตือน' },
+    { path: '/seeker/home', icon: Home, label: 'หน้าแรก' },
+    { path: '/seeker/chat', icon: MessageSquare, label: 'แชท' },
+    { path: '/seeker/notifications', icon: Bell, label: 'แจ้งเตือน' },
   ];
 
   const isActive = (path: string) => {
-    // Handle special case for home to not match other routes like /home/details
-    if (path === '/home') {
+    // Handle special case for home to not match other routes like /seeker/home/details
+    if (path === '/seeker/home') {
       return location.pathname === path;
     }
     return location.pathname.startsWith(path);
@@ -47,13 +47,13 @@ const BottomNavigation: React.FC = () => {
 
         {/* Profile Link */}
         <Link
-          to="/profile"
+          to="/seeker/profile"
           className="flex flex-1 flex-col items-center justify-center gap-1 rounded-xl px-2 py-2 text-center text-gray-600 transition-all duration-200 hover:bg-gray-50 active:scale-[0.98]"
           title="โปรไฟล์"
         >
           <div
             className={`flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border-2 transition-colors duration-200 ${
-              isActive('/profile') ? 'border-primary' : 'border-transparent'
+              isActive('/seeker/profile') ? 'border-primary' : 'border-transparent'
             }`}
           >
             {(user?.picture || firebaseUser?.photoURL || localStorage.getItem('liff_picture_url')) ? (
@@ -65,11 +65,11 @@ const BottomNavigation: React.FC = () => {
               />
             ) : (
               <div className="flex h-full w-full items-center justify-center bg-gray-200">
-                <User className={`h-6 w-6 ${isActive('/profile') ? 'text-black' : 'text-gray-500'}`} />
+                <User className={`h-6 w-6 ${isActive('/seeker/profile') ? 'text-black' : 'text-gray-500'}`} />
               </div>
             )}
           </div>
-          <span className={`mt-1 text-sm ${isActive('/profile') ? 'font-semibold text-black' : 'text-gray-500'}`}>โปรไฟล์</span>
+          <span className={`mt-1 text-sm ${isActive('/seeker/profile') ? 'font-semibold text-black' : 'text-gray-500'}`}>โปรไฟล์</span>
         </Link>
       </div>
     </footer>

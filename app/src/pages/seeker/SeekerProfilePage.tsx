@@ -114,7 +114,7 @@ const ProfilePage: React.FC = () => {
           {/* Name and Bio */}
           <div className="mb-4">
             <h2 className="text-gray-900 font-bold text-xl">{user?.name || firebaseUser?.displayName || 'ผู้เยี่ยมชม'}</h2>
-            <div className="flex items-start text-gray-600 mt-1 cursor-pointer group" onClick={() => navigate('/profile/edit')}>
+            <div className="flex items-start text-gray-600 mt-1 cursor-pointer group" onClick={() => navigate('/seeker/profile/edit')}>
               <p className="text-sm">{profileData.bio || 'เพิ่มคำอธิบายตัวตนของคุณ...'}</p>
               <Pencil className="h-3 w-3 ml-2 mt-1 flex-shrink-0 text-gray-400 group-hover:text-primary" />
             </div>
@@ -122,7 +122,7 @@ const ProfilePage: React.FC = () => {
 
           {/* Action Buttons */}
           <div className="flex space-x-3 mb-6">
-            <Button className="flex-1 font-semibold bg-black text-white hover:bg-black/90" onClick={() => navigate('/profile/edit')}>แก้ไขโปรไฟล์</Button>
+            <Button className="flex-1 font-semibold bg-black text-white hover:bg-black/90" onClick={() => navigate('/seeker/profile/edit')}>แก้ไขโปรไฟล์</Button>
             <Button className="flex-1 font-semibold bg-black text-white hover:bg-black/90" onClick={handleShare}>แชร์โปรไฟล์</Button>
           </div>
         </div>
@@ -130,7 +130,7 @@ const ProfilePage: React.FC = () => {
         {/* Wallet Section */}
         <div className="px-4 mb-6">
             <div 
-                onClick={() => navigate('/wallet')}
+                onClick={() => navigate('/seeker/wallet')}
                 className="bg-gray-50 rounded-xl p-4 flex items-center justify-between cursor-pointer hover:bg-gray-100 transition-colors"
             >
                 <div className="flex items-center">

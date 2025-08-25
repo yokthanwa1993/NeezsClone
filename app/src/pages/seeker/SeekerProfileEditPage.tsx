@@ -116,7 +116,7 @@ const SeekerProfileEditPage: React.FC = () => {
       localStorage.setItem('user_portfolio', formData.portfolio);
 
       alert('บันทึกข้อมูลเรียบร้อยแล้ว');
-      navigate('/profile');
+      navigate('/seeker/profile');
     } catch (error) {
       console.error('Error updating profile:', error);
       alert('เกิดข้อผิดพลาดในการอัปเดตโปรไฟล์');
@@ -278,7 +278,7 @@ const SeekerProfileEditPage: React.FC = () => {
           <Button
             variant="outline"
             className="flex-1"
-            onClick={() => navigate('/profile')}
+            onClick={() => navigate('/seeker/profile')}
           >
             ยกเลิก
           </Button>

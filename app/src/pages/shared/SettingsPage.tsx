@@ -32,13 +32,13 @@ const SettingsPage = () => {
   const handleItemClick = (label: string) => {
     switch (label) {
       case 'ข้อมูลส่วนตัว':
-        navigate('/profile');
+        navigate('/seeker/profile');
         break;
       case 'ความปลอดภัย':
         navigate('/security');
         break;
       case 'การแจ้งเตือน':
-        navigate('/notifications');
+        navigate('/seeker/notifications');
         break;
       case 'คำถามที่พบบ่อย':
         navigate('/faq');

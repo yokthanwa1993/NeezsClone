@@ -23,7 +23,7 @@ const ChatHistoryPage: React.FC = () => {
     const { isLiffLoading } = useLiff();
 
     const handleChatSelect = (chatId: number) => {
-        navigate(`/chat/${chatId}`);
+        navigate(`/seeker/chat/${chatId}`);
     };
 
     return (

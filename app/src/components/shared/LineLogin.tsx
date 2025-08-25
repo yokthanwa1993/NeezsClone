@@ -19,7 +19,7 @@ const LineLogin: React.FC<LineLoginProps> = ({ onLoginSuccess }) => {
       if (onLoginSuccess) {
         onLoginSuccess();
       } else {
-        navigate('/home');
+        navigate('/seeker/home');
       }
     }
   }, [user, onLoginSuccess]);

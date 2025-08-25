@@ -92,13 +92,13 @@ const SeekerHome = () => {
             <section className="pt-2 pb-6 px-4">
                 <div className="flex justify-between items-center mb-4">
                     <h2 className="text-lg font-bold text-gray-800">งานล่าสุด</h2>
-                    <button onClick={() => navigate('/jobs')} className="text-sm text-primary font-semibold">
+                    <button onClick={() => navigate('/seeker/jobs')} className="text-sm text-primary font-semibold">
                         ดูทั้งหมด
                     </button>
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                     {jobs.slice(0, 20).map((job) => (
-                        <Card key={job.id} className="overflow-hidden rounded-2xl shadow-lg border-none group w-full cursor-pointer" onClick={() => navigate(`/job/${job.id}`)}>
+                        <Card key={job.id} className="overflow-hidden rounded-2xl shadow-lg border-none group w-full cursor-pointer" onClick={() => navigate(`/seeker/job/${job.id}`)}>
                             <div className="relative">
                                 <img src={job.imageUrls[0]} alt={job.title} className="w-full h-32 object-cover" />
                             </div>

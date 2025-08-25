@@ -28,7 +28,7 @@ const SeekerEkycFace: React.FC = () => {
 
   const handleFinish = () => {
     console.log('eKYC data:', location.state);
-    navigate('/home', { replace: true });
+    navigate('/seeker/home', { replace: true });
   };
 
   return (

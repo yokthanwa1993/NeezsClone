@@ -65,7 +65,7 @@ const SeekerLogin: React.FC<SeekerLoginProps> = ({ onLoginSuccess }) => {
       if (onLoginSuccess) {
         onLoginSuccess();
       } else {
-        navigate('/home');
+        navigate('/seeker/home');
       }
     } catch (error: any) {
       console.error('Login error:', error);

@@ -96,7 +96,7 @@ const AppContent = () => {
       {/* Root and Shared Routes */}
       <Route path="/" element={<Navigate to="/welcome" replace />} />
       <Route path="/welcome" element={<OnboardingFlow />} />
-      <Route path="/login" element={<AppLayout><LineLogin onLoginSuccess={() => navigate('/home')} /></AppLayout>} />
+      <Route path="/login" element={<AppLayout><LineLogin onLoginSuccess={() => navigate('/seeker/home')} /></AppLayout>} />
       <Route path="/seeker-login" element={<AppLayout><SeekerLogin /></AppLayout>} />
       <Route path="/employer-login" element={<AppLayout><EmployerLogin onLoginSuccess={() => navigate('/employer/profile')} /></AppLayout>} />
       <Route path="/callback" element={<AppLayout><LineCallback /></AppLayout>} />
@@ -113,17 +113,30 @@ const AppContent = () => {
       <Route path="/map-view" element={<MapView />} />
       
       {/* Seeker Routes wrapped in SeekerLayout */}
-      <Route path="/home" element={<SeekerLayout><SeekerHome /></SeekerLayout>} />
-      <Route path="/profile" element={<SeekerLayout><SeekerProfilePage /></SeekerLayout>} />
-      <Route path="/profile/edit" element={<SeekerLayout><SeekerProfileEditPage /></SeekerLayout>} />
-      <Route path="/wallet" element={protectedRoute(<SeekerLayout><SeekerWallet /></SeekerLayout>, 'seeker')} />
-      <Route path="/my-shifts" element={protectedRoute(<SeekerLayout><SeekerMyShifts /></SeekerLayout>, 'seeker')} />
-      <Route path="/job/:id" element={<SeekerLayout><SeekerJobDetail /></SeekerLayout>} />
-      <Route path="/jobs" element={<SeekerLayout><SeekerJobFeed /></SeekerLayout>} />
-      <Route path="/full-time-jobs" element={<SeekerLayout><SeekerFullTimeJobs /></SeekerLayout>} />
-      <Route path="/chat" element={<SeekerLayout><SeekerChatHistoryPage /></SeekerLayout>} />
-      <Route path="/chat/:id" element={<SeekerLayout><SeekerChatPage /></SeekerLayout>} />
-      <Route path="/notifications" element={<SeekerLayout><NotificationsPage /></SeekerLayout>} />
+      <Route path="/seeker/home" element={<SeekerLayout><SeekerHome /></SeekerLayout>} />
+      <Route path="/seeker/profile" element={<SeekerLayout><SeekerProfilePage /></SeekerLayout>} />
+      <Route path="/seeker/profile/edit" element={<SeekerLayout><SeekerProfileEditPage /></SeekerLayout>} />
+      <Route path="/seeker/wallet" element={protectedRoute(<SeekerLayout><SeekerWallet /></SeekerLayout>, 'seeker')} />
+      <Route path="/seeker/my-shifts" element={protectedRoute(<SeekerLayout><SeekerMyShifts /></SeekerLayout>, 'seeker')} />
+      <Route path="/seeker/job/:id" element={<SeekerLayout><SeekerJobDetail /></SeekerLayout>} />
+      <Route path="/seeker/jobs" element={<SeekerLayout><SeekerJobFeed /></SeekerLayout>} />
+      <Route path="/seeker/full-time-jobs" element={<SeekerLayout><SeekerFullTimeJobs /></SeekerLayout>} />
+      <Route path="/seeker/chat" element={<SeekerLayout><SeekerChatHistoryPage /></SeekerLayout>} />
+      <Route path="/seeker/chat/:id" element={<SeekerLayout><SeekerChatPage /></SeekerLayout>} />
+      <Route path="/seeker/notifications" element={<SeekerLayout><NotificationsPage /></SeekerLayout>} />
+      
+      {/* Backward compatibility redirects */}
+      <Route path="/home" element={<Navigate to="/seeker/home" replace />} />
+      <Route path="/profile" element={<Navigate to="/seeker/profile" replace />} />
+      <Route path="/profile/edit" element={<Navigate to="/seeker/profile/edit" replace />} />
+      <Route path="/wallet" element={<Navigate to="/seeker/wallet" replace />} />
+      <Route path="/my-shifts" element={<Navigate to="/seeker/my-shifts" replace />} />
+      <Route path="/job/:id" element={<Navigate to="/seeker/job/:id" replace />} />
+      <Route path="/jobs" element={<Navigate to="/seeker/jobs" replace />} />
+      <Route path="/full-time-jobs" element={<Navigate to="/seeker/full-time-jobs" replace />} />
+      <Route path="/chat" element={<Navigate to="/seeker/chat" replace />} />
+      <Route path="/chat/:id" element={<Navigate to="/seeker/chat/:id" replace />} />
+      <Route path="/notifications" element={<Navigate to="/seeker/notifications" replace />} />
       
       {/* Seeker Application Flow */}
       <Route path="/seeker/apply/otp" element={<SeekerLayout><SeekerOtpVerification /></SeekerLayout>} />

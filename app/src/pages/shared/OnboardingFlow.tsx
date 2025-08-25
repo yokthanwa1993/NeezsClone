@@ -38,7 +38,7 @@ const OnboardingFlow: React.FC = () => {
     const handleFinish = () => {
         localStorage.setItem('onboardingCompleted', 'true');
         localStorage.setItem('userInterests', JSON.stringify(selectedCategories));
-        navigate('/home');
+        navigate('/seeker/home');
     };
     
     const handleCategoryToggle = (categoryName: string) => {

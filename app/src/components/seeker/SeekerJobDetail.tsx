@@ -14,7 +14,7 @@ const SeekerJobDetail = () => {
         return (
             <div className="flex flex-col items-center justify-center h-screen">
                 <h2 className="text-2xl font-bold mb-4">ไม่พบงานที่ค้นหา</h2>
-                <Button onClick={() => navigate('/home')}>กลับสู่หน้าหลัก</Button>
+                <Button onClick={() => navigate('/seeker/home')}>กลับสู่หน้าหลัก</Button>
             </div>
         );
     }

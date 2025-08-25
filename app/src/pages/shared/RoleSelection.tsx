@@ -14,7 +14,7 @@ const RoleSelection: React.FC = () => {
     
     // Redirect based on role
     if (role === 'applicant') {
-      navigate('/home');
+      navigate('/seeker/home');
     } else {
       navigate('/employer/add-job');
     }
