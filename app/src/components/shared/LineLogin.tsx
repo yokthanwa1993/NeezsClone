@@ -53,7 +53,7 @@ const LineLogin: React.FC<LineLoginProps> = ({ onLoginSuccess }) => {
 
   if (isLiffLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
+      <div className="fixed inset-0 w-full h-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center overflow-hidden">
         <div className="text-center text-white">
           <div className="w-16 h-16 mx-auto mb-6">
             <div className="animate-spin rounded-full h-16 w-16 border-4 border-white border-t-transparent"></div>
@@ -67,7 +67,7 @@ const LineLogin: React.FC<LineLoginProps> = ({ onLoginSuccess }) => {
 
   if (isLoggingIn) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center p-4">
+      <div className="fixed inset-0 w-full h-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center p-4 overflow-hidden">
         <div className="text-center text-white">
           <div className="w-16 h-16 mx-auto mb-6">
             <div className="animate-spin rounded-full h-16 w-16 border-4 border-white border-t-transparent"></div>
@@ -80,7 +80,7 @@ const LineLogin: React.FC<LineLoginProps> = ({ onLoginSuccess }) => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center p-4">
+    <div className="fixed inset-0 w-full h-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center p-4 overflow-hidden">
       <div className="w-full max-w-sm mx-auto">
         <div className="bg-white rounded-3xl shadow-2xl p-8">
           <div className="text-center mb-8">
