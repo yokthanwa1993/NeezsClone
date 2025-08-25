@@ -112,18 +112,18 @@ const AppContent = () => {
       
       <Route path="/map-view" element={<MapView />} />
       
-      {/* Seeker Routes wrapped in SeekerLayout */}
-      <Route path="/seeker/home" element={<SeekerLayout><SeekerHome /></SeekerLayout>} />
-      <Route path="/seeker/profile" element={<SeekerLayout><SeekerProfilePage /></SeekerLayout>} />
-      <Route path="/seeker/profile/edit" element={<SeekerLayout><SeekerProfileEditPage /></SeekerLayout>} />
+      {/* Seeker Routes wrapped in SeekerLayout - All Protected */}
+      <Route path="/seeker/home" element={protectedRoute(<SeekerLayout><SeekerHome /></SeekerLayout>, 'seeker')} />
+      <Route path="/seeker/profile" element={protectedRoute(<SeekerLayout><SeekerProfilePage /></SeekerLayout>, 'seeker')} />
+      <Route path="/seeker/profile/edit" element={protectedRoute(<SeekerLayout><SeekerProfileEditPage /></SeekerLayout>, 'seeker')} />
       <Route path="/seeker/wallet" element={protectedRoute(<SeekerLayout><SeekerWallet /></SeekerLayout>, 'seeker')} />
       <Route path="/seeker/my-shifts" element={protectedRoute(<SeekerLayout><SeekerMyShifts /></SeekerLayout>, 'seeker')} />
-      <Route path="/seeker/job/:id" element={<SeekerLayout><SeekerJobDetail /></SeekerLayout>} />
-      <Route path="/seeker/jobs" element={<SeekerLayout><SeekerJobFeed /></SeekerLayout>} />
-      <Route path="/seeker/full-time-jobs" element={<SeekerLayout><SeekerFullTimeJobs /></SeekerLayout>} />
-      <Route path="/seeker/chat" element={<SeekerLayout><SeekerChatHistoryPage /></SeekerLayout>} />
-      <Route path="/seeker/chat/:id" element={<SeekerLayout><SeekerChatPage /></SeekerLayout>} />
-      <Route path="/seeker/notifications" element={<SeekerLayout><NotificationsPage /></SeekerLayout>} />
+      <Route path="/seeker/job/:id" element={protectedRoute(<SeekerLayout><SeekerJobDetail /></SeekerLayout>, 'seeker')} />
+      <Route path="/seeker/jobs" element={protectedRoute(<SeekerLayout><SeekerJobFeed /></SeekerLayout>, 'seeker')} />
+      <Route path="/seeker/full-time-jobs" element={protectedRoute(<SeekerLayout><SeekerFullTimeJobs /></SeekerLayout>, 'seeker')} />
+      <Route path="/seeker/chat" element={protectedRoute(<SeekerLayout><SeekerChatHistoryPage /></SeekerLayout>, 'seeker')} />
+      <Route path="/seeker/chat/:id" element={protectedRoute(<SeekerLayout><SeekerChatPage /></SeekerLayout>, 'seeker')} />
+      <Route path="/seeker/notifications" element={protectedRoute(<SeekerLayout><NotificationsPage /></SeekerLayout>, 'seeker')} />
       
       {/* Backward compatibility redirects */}
       <Route path="/home" element={<Navigate to="/seeker/home" replace />} />
@@ -138,36 +138,35 @@ const AppContent = () => {
       <Route path="/chat/:id" element={<Navigate to="/seeker/chat/:id" replace />} />
       <Route path="/notifications" element={<Navigate to="/seeker/notifications" replace />} />
       
-      {/* Seeker Application Flow */}
-      <Route path="/seeker/apply/otp" element={<SeekerLayout><SeekerOtpVerification /></SeekerLayout>} />
+      {/* Seeker Application Flow - All Protected */}
+      <Route path="/seeker/apply/otp" element={protectedRoute(<SeekerLayout><SeekerOtpVerification /></SeekerLayout>, 'seeker')} />
       {/* select-category removed per request */}
-      <Route path="/seeker/apply/ekyc-id" element={<SeekerLayout><SeekerEkycId /></SeekerLayout>} />
-      <Route path="/seeker/apply/ekyc-face" element={<SeekerLayout><SeekerEkycFace /></SeekerLayout>} />
-      <Route path="/seeker/apply/bid" element={<SeekerLayout><SeekerBidPrice /></SeekerLayout>} />
+      <Route path="/seeker/apply/ekyc-id" element={protectedRoute(<SeekerLayout><SeekerEkycId /></SeekerLayout>, 'seeker')} />
+      <Route path="/seeker/apply/ekyc-face" element={protectedRoute(<SeekerLayout><SeekerEkycFace /></SeekerLayout>, 'seeker')} />
+      <Route path="/seeker/apply/bid" element={protectedRoute(<SeekerLayout><SeekerBidPrice /></SeekerLayout>, 'seeker')} />
       
-      {/* Employer Routes: home is the Add Job page, my-jobs is the job list */}
-      <Route path="/employer/home" element={<EmployerLayout><EmployerAddJob /></EmployerLayout>} />
+      {/* Employer Routes: home is the Add Job page, my-jobs is the job list - All Protected */}
+      <Route path="/employer/home" element={protectedRoute(<EmployerLayout><EmployerAddJob /></EmployerLayout>, 'employer')} />
       <Route path="/employer/add-job" element={<Navigate to="/employer/home" replace />} />
-      <Route path="/employer/my-jobs" element={<EmployerLayout><EmployerMyJobsPage /></EmployerLayout>} />
-      <Route path="/employer/job/:jobId/seekers" element={<EmployerLayout><EmployerSeekerSelection /></EmployerLayout>} />
-      <Route path="/employer/seeker/:seekerId/profile" element={<EmployerLayout><EmployerSeekerProfile /></EmployerLayout>} />
-      <Route path="/employer/job/:jobId/detail" element={<EmployerLayout><EmployerJobDetail /></EmployerLayout>} />
-      <Route path="/employer/job/:jobId/applicants" element={<EmployerLayout><EmployerJobApplicants /></EmployerLayout>} />
-      <Route path="/employer/applicant/:applicantId" element={<EmployerLayout><EmployerApplicantProfilePage /></EmployerLayout>} />
-      <Route path="/employer/my-jobs" element={<EmployerLayout><EmployerMyJobsPage /></EmployerLayout>} />
-      <Route path="/employer/chat" element={<EmployerLayout><EmployerChatHistoryPage /></EmployerLayout>} />
-      <Route path="/employer/chat/:id" element={<EmployerLayout><EmployerChatPage /></EmployerLayout>} />
-      <Route path="/employer/notifications" element={<EmployerLayout><EmployerNotificationsPage /></EmployerLayout>} />
-      <Route path="/employer/profile" element={<EmployerLayout><EmployerProfile /></EmployerLayout>} />
-      <Route path="/employer/edit-profile" element={<EmployerLayout><EmployerEditProfilePage /></EmployerLayout>} />
-      <Route path="/employer/team" element={<EmployerLayout><EmployerTeamManagementPage /></EmployerLayout>} />
-      <Route path="/employer/billing" element={<EmployerLayout><EmployerBillingPage /></EmployerLayout>} />
-      <Route path="/employer/security" element={<EmployerLayout><EmployerSecurityPage /></EmployerLayout>} />
-      <Route path="/employer/job-schedule" element={<EmployerLayout><EmployerJobSchedule /></EmployerLayout>} />
-      <Route path="/employer/job-wage" element={<EmployerLayout><EmployerJobWage /></EmployerLayout>} />
+      <Route path="/employer/my-jobs" element={protectedRoute(<EmployerLayout><EmployerMyJobsPage /></EmployerLayout>, 'employer')} />
+      <Route path="/employer/job/:jobId/seekers" element={protectedRoute(<EmployerLayout><EmployerSeekerSelection /></EmployerLayout>, 'employer')} />
+      <Route path="/employer/seeker/:seekerId/profile" element={protectedRoute(<EmployerLayout><EmployerSeekerProfile /></EmployerLayout>, 'employer')} />
+      <Route path="/employer/job/:jobId/detail" element={protectedRoute(<EmployerLayout><EmployerJobDetail /></EmployerLayout>, 'employer')} />
+      <Route path="/employer/job/:jobId/applicants" element={protectedRoute(<EmployerLayout><EmployerJobApplicants /></EmployerLayout>, 'employer')} />
+      <Route path="/employer/applicant/:applicantId" element={protectedRoute(<EmployerLayout><EmployerApplicantProfilePage /></EmployerLayout>, 'employer')} />
+      <Route path="/employer/chat" element={protectedRoute(<EmployerLayout><EmployerChatHistoryPage /></EmployerLayout>, 'employer')} />
+      <Route path="/employer/chat/:id" element={protectedRoute(<EmployerLayout><EmployerChatPage /></EmployerLayout>, 'employer')} />
+      <Route path="/employer/notifications" element={protectedRoute(<EmployerLayout><EmployerNotificationsPage /></EmployerLayout>, 'employer')} />
+      <Route path="/employer/profile" element={protectedRoute(<EmployerLayout><EmployerProfile /></EmployerLayout>, 'employer')} />
+      <Route path="/employer/edit-profile" element={protectedRoute(<EmployerLayout><EmployerEditProfilePage /></EmployerLayout>, 'employer')} />
+      <Route path="/employer/team" element={protectedRoute(<EmployerLayout><EmployerTeamManagementPage /></EmployerLayout>, 'employer')} />
+      <Route path="/employer/billing" element={protectedRoute(<EmployerLayout><EmployerBillingPage /></EmployerLayout>, 'employer')} />
+      <Route path="/employer/security" element={protectedRoute(<EmployerLayout><EmployerSecurityPage /></EmployerLayout>, 'employer')} />
+      <Route path="/employer/job-schedule" element={protectedRoute(<EmployerLayout><EmployerJobSchedule /></EmployerLayout>, 'employer')} />
+      <Route path="/employer/job-wage" element={protectedRoute(<EmployerLayout><EmployerJobWage /></EmployerLayout>, 'employer')} />
       {/* <Route path="/employer/job-publish" element={<EmployerJobPublish />} /> */}
-      <Route path="/employer/job-upload" element={<EmployerJobUpload />} />
-      <Route path="/employer/job-summary" element={<EmployerLayout><EmployerJobSummary /></EmployerLayout>} />
+      <Route path="/employer/job-upload" element={protectedRoute(<EmployerJobUpload />, 'employer')} />
+      <Route path="/employer/job-summary" element={protectedRoute(<EmployerLayout><EmployerJobSummary /></EmployerLayout>, 'employer')} />
       <Route path="*" element={<AppLayout><NotFound /></AppLayout>} />
     </Routes>
   );
