@@ -6,6 +6,10 @@ export default defineConfig(() => ({
   server: {
     host: "0.0.0.0",
     port: 5000,
+    hmr: {
+      clientPort: 443,
+      protocol: "wss"
+    },
     proxy: {
       "/api": {
         // Route dev API calls to production by default so local UI sees real data
