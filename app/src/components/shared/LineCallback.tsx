@@ -119,8 +119,15 @@ const LineCallback: React.FC = () => {
       console.log('🎉 Authentication completed successfully!');
       console.log('🔄 Redirecting to home page...');
 
-      // Redirect to home page
-      navigate('/seeker/home', { replace: true });
+      // Check stored role to determine redirect destination
+      const storedRole = localStorage.getItem('login_role') || 'seeker';
+      localStorage.removeItem('login_role'); // Clean up
+      
+      const redirectPath = storedRole === 'employer' ? '/employer/home' : '/seeker/home';
+      console.log(`🎯 Redirecting ${storedRole} to: ${redirectPath}`);
+      
+      // Redirect to role-specific home page
+      navigate(redirectPath, { replace: true });
 
     } catch (error: any) {
       console.error('LINE callback error:', error);

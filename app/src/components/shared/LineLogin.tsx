@@ -51,6 +51,10 @@ const LineLogin: React.FC<LineLoginProps> = ({ onLoginSuccess, role = 'seeker' }
       const redirectUri = new URL('/callback', import.meta.env.VITE_APP_DOMAIN || window.location.origin).toString();
       console.log('🚀 Starting LINE login with redirect:', redirectUri);
 
+      // Store role before login so callback knows where to redirect
+      localStorage.setItem('login_role', role);
+      console.log(`📝 Stored login role: ${role}`);
+
       // Start LINE login
       liff.login({ redirectUri });
 
