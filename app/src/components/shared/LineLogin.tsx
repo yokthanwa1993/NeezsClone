@@ -56,7 +56,11 @@ const LineLogin: React.FC<LineLoginProps> = ({ onLoginSuccess, role = 'seeker' }
 
     } catch (error: any) {
       console.error('❌ LINE login error:', error);
-      alert('เกิดข้อผิดพลาดในการเข้าสู่ระบบ กรุณาลองใหม่อีกครั้ง');
+      if (error.message && error.message.includes('blocked')) {
+        alert('กรุณาตรวจสอบการตั้งค่า LIFF ใน LINE Developers Console\nหรือลองเปิดในเบราว์เซอร์หลักแทนการใช้ในแอป');
+      } else {
+        alert('เกิดข้อผิดพลาดในการเข้าสู่ระบบ กรุณาลองใหม่อีกครั้ง');
+      }
       setIsLoggingIn(false);
     }
   };
