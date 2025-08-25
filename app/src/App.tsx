@@ -68,7 +68,7 @@ const AppContent = () => {
     if (isLoading || isLiffLoading) return;
     // Redirect to login if no user on root path
     if (location.pathname === '/' && !user) {
-      navigate('/login', { replace: true });
+      navigate('/role-selection', { replace: true });
     }
   }, [navigate, isLoading, isLiffLoading, user, location.pathname]);
 
@@ -84,7 +84,7 @@ const AppContent = () => {
       if (role === 'employer') {
         return <Navigate to="/employer/login" replace />;
       }
-      return <Navigate to="/login" replace />;
+      return <Navigate to="/role-selection" replace />;
     }
     return element;
   };
@@ -92,14 +92,13 @@ const AppContent = () => {
   return (
     <Routes>
       {/* Root and Shared Routes */}
-      <Route path="/" element={<Navigate to="/login" replace />} />
-      <Route path="/login" element={<AppLayout><LineLogin onLoginSuccess={() => navigate('/seeker/home')} /></AppLayout>} />
+      <Route path="/" element={<Navigate to="/role-selection" replace />} />
       <Route path="/seeker/login" element={<AppLayout><SeekerLogin /></AppLayout>} />
       <Route path="/employer/login" element={<AppLayout><EmployerLogin onLoginSuccess={() => navigate('/employer/profile')} /></AppLayout>} />
       <Route path="/callback" element={<AppLayout><LineCallback /></AppLayout>} />
       
       {/* Protected routes with specific layouts */}
-      <Route path="/role-selection" element={protectedRoute(<AppLayout><RoleSelection /></AppLayout>)} />
+      <Route path="/role-selection" element={<AppLayout><RoleSelection /></AppLayout>} />
       <Route path="/onboarding" element={protectedRoute(<AppLayout><Onboarding /></AppLayout>)} />
       
       {/* These shared pages now get the correct role-based navbar */}
@@ -171,7 +170,7 @@ const AppContent = () => {
 
 function App() {
   return (
-    <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+    <Router>
       <AppProviders>
         <JobProvider>
           <AppContent />

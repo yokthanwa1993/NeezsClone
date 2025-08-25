@@ -12,11 +12,11 @@ const RoleSelection: React.FC = () => {
   const handleRoleSelect = (role: 'applicant' | 'employer') => {
     setRole(role);
     
-    // Redirect based on role
+    // Redirect to login page based on role
     if (role === 'applicant') {
-      navigate('/seeker/home');
+      navigate('/seeker/login');
     } else {
-      navigate('/employer/add-job');
+      navigate('/employer/login');
     }
   };
 
