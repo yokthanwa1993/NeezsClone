@@ -2,7 +2,6 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 import { auth } from '@/lib/firebase';
 import { signOut, onAuthStateChanged, User as FirebaseUser, signInWithCustomToken } from 'firebase/auth';
 import { resetLiffState } from './LiffContext';
-import { useDevMode } from './DevModeContext';
 
 interface User {
   id: string;
@@ -12,13 +11,6 @@ interface User {
   role?: 'seeker' | 'employer';
 }
 
-const devUser: User = {
-  id: 'dev-user-007',
-  name: 'นักพัฒนา ทดสอบ',
-  email: 'dev@example.com',
-  picture: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop&crop=face',
-  role: 'seeker',
-};
 
 interface AuthContextType {
   user: User | null;
@@ -44,7 +36,6 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const { isDevMode } = useDevMode();
   const [user, setUser] = useState<User | null>(() => {
     try {
       const savedUser = localStorage.getItem('auth_user');
@@ -146,12 +137,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
-  // ใน production (Firebase Hosting) ปิด dev user เสมอ
-  const isHosted = typeof window !== 'undefined' && (window.location.hostname.endsWith('.web.app') || window.location.hostname.endsWith('.firebaseapp.com'));
-  const exposedUser = (!isHosted && isDevMode && !firebaseUser) ? devUser : user;
 
   const value = {
-    user: exposedUser,
+    user,
     firebaseUser,
     setUser: (newUser: User | null) => {
       setUser(newUser);

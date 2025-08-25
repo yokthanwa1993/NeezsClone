@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate, Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from './contexts/AuthContext';
-import { useDevMode } from './contexts/DevModeContext';
 import { useLiff } from './contexts/LiffContext';
 import { AppProviders } from '@/providers/AppProviders';
 import LineLogin from './components/shared/LineLogin';
@@ -19,7 +18,6 @@ import SeekerChatHistoryPage from './pages/seeker/SeekerChatHistoryPage';
 import NotificationsPage from './pages/shared/NotificationsPage';
 import SeekerFullTimeJobs from './pages/seeker/SeekerFullTimeJobs';
 import LineCallback from './components/shared/LineCallback';
-import DevPage from './pages/shared/DevPage';
 import EmployerHome from './pages/employer/EmployerHome';
 import EmployerChatHistoryPage from './pages/employer/EmployerChatHistoryPage';
 import EmployerChatPage from './pages/employer/EmployerChatPage';
@@ -62,7 +60,6 @@ import SplashScreen from './components/shared/SplashScreen';
 
 const AppContent = () => {
   const { user, isLoading } = useAuth();
-  const { isDevMode } = useDevMode();
   const navigate = useNavigate();
   const location = useLocation();
   const { isLiffLoading } = useLiff();
@@ -82,7 +79,6 @@ const AppContent = () => {
   }
 
   const protectedRoute = (element: React.ReactElement, role: 'seeker' | 'employer' | 'any' = 'any') => {
-    if (isDevMode) return element;
     if (!user) {
       if (role === 'seeker') {
         return <Navigate to="/seeker-login" replace />;
@@ -98,7 +94,7 @@ const AppContent = () => {
   return (
     <Routes>
       {/* Root and Shared Routes */}
-      <Route path="/" element={<AppLayout><DevPage /></AppLayout>} />
+      <Route path="/" element={<Navigate to="/welcome" replace />} />
       <Route path="/welcome" element={<OnboardingFlow />} />
       <Route path="/login" element={<AppLayout><LineLogin onLoginSuccess={() => navigate('/home')} /></AppLayout>} />
       <Route path="/seeker-login" element={<AppLayout><SeekerLogin /></AppLayout>} />
